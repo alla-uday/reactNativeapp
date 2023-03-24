@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+apply plugin: "fullstory"
 
 import com.android.build.OutputFile
 
@@ -71,6 +72,12 @@ react {
 ext {
   hermesEnabled = (findProperty('expo.jsEngine') ?: "hermes") == "hermes"
 }
+//project.ext.react = [
+//        enableHermes: false,  // clean and rebuild if changing
+//        devDisabledInDev: true, // Disable dev server in dev release
+//        bundleInDebug: true, // add bundle to dev apk
+//        bundleInRelease: true
+//]
 
 /**
  * Set this to true to create four separate APKs instead of one,
@@ -107,6 +114,14 @@ def reactNativeArchitectures() {
     def value = project.getProperties().get("reactNativeArchitectures")
     return value ? value.split(",") : ["armeabi-v7a", "x86", "x86_64", "arm64-v8a"]
 }
+
+fullstory {
+    org "o-1GZN7Q-na1"
+    enabledVariants "all"
+    logLevel "debug"
+}
+
+
 
 android {
     ndkVersion rootProject.ext.ndkVersion
